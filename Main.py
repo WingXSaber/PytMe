@@ -1,5 +1,8 @@
 
 
+#if comment
+#if string with "" or ''
+#escape characters?
 
 def split_into_lexemes(inputText):
     inputText = inputText.lstrip();  #Remove Whitespaces at start
@@ -23,17 +26,17 @@ def split_into_lexemes(inputText):
             lexeme = lexeme + char        
         elif(char in ["+","-","*","/","%"]):                    #if operator
             if(len(lexeme)>0):  #true means the end of a lexeme
-                lexemeList.append(lexeme)#add the lexeme to list
-                lexeme = ""              #clear lexeme
+                lexemeList.append(lexeme) #add the lexeme to list
+                lexeme = ""               #clear lexeme
             lexeme = lexeme + char
         elif(char == "=" and lexeme in ["+","-","*","/","%"]):  #if assignment operator ie. += , *=
             lexeme = lexeme + char
-            lexemeList.append(lexeme)   #add the lexeme to list
-            lexeme = ""                 #clear lexeme
+            lexemeList.append(lexeme) #add the lexeme to list
+            lexeme = ""               #clear lexeme
         else:                                                   #if anything else
             if(len(lexeme)>0): #true means the end of a lexeme 
-                lexemeList.append(lexeme)   #add the lexeme to list
-                lexeme = ""                 #clear lexeme
+                lexemeList.append(lexeme) #add the lexeme to list
+                lexeme = ""               #clear lexeme
             else:              #if it's single char lexeme
                 lexemeList.append(char)      
         index+=1;   #loop iteration
@@ -51,7 +54,16 @@ def main():
     inputText = input();
     
     lexemeList = split_into_lexemes(inputText);
-    print(lexemeList);
+    #print(lexemeList);
+    
+    #for i in range(0, len(lexemeList), i):
+        
+    print("\nLEXEMES:");
+    for a in lexemeList:
+        print(a);
+        
+    print("Lexeme Count: "+str(len(lexemeList)));
+        
 
 main();
 
