@@ -20,7 +20,7 @@ def split_into_lexemes(inputText):
     isSingleQuote = False;  #if detected string is started with '
     isDoubleQuote = False;  #if detected string is started with "
     
-    isNumeric
+    isNumeric = False; #flag used to mark if we are detecting number (assuming we didnt detect letter before)
     
     isCommentSingle = False;   #flag used to mark if we are detecting a single-line comment
     isCommentMultiple = False; #flag used to mark if we are detecting a multi-line comment
@@ -41,15 +41,24 @@ def split_into_lexemes(inputText):
                 isSingleQuote = False;
                 isDoubleQuote = False;
             
-        elif(char.isspace()):                                     #if whitespace
+        elif(char.isspace()):                                   #if whitespace
             if(len(lexeme)>0):  #true means the end of a lexeme
                 lexemeList.append(lexeme) #add the lexeme to list
                 lexeme = ""               #clear lexeme
             #else means nothing to append
         elif(char.isalpha()):                                   #if letter  
             lexeme = lexeme + char
-        elif(char.isnumeric() and len(lexeme)>0):               #if whitespace
-            lexeme = lexeme + char        
+        elif(char.isnumeric()):                                 #if number
+            lexeme = lexeme + char 
+            """
+            if(len(lexeme)>0):                             
+                lexeme = lexeme + char     
+            else:
+                #isNumeric = true;   
+                lexemeList.append(lexeme) #add the lexeme to list
+                lexeme = ""               #clear lexeme  
+                lexeme = lexeme + char  
+            """
         elif(char in ["+","-","*","/","%",  ">","<","!"] or char == "=" != lexeme):   #if operator or equal operator
             if(len(lexeme)>0):  #true means the end of a lexeme
                 lexemeList.append(lexeme) #add the lexeme to list
@@ -98,7 +107,7 @@ def main():
     
     #for i in range(0, len(lexemeList), i):
         
-    print("\nLEXEMES:");
+    print("\nLEXEMES:\n-----------------------------------------------------");
     for a in lexemeList:
         print(a);
         
