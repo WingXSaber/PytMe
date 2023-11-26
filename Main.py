@@ -80,13 +80,14 @@ def split_into_lexemes(inputText):
                 lexemeList.append(lexeme) #add the lexeme to list
                 lexeme = ""               #clear lexeme
             lexeme = lexeme + char   
-        elif(char == "="):                                      #if char is equals operator   
-            #if operator then equals i.e. +=, <=, ==
+        elif(char == "="):                                      #if char is assignment operator              
             if(lexeme in operatorList or lexeme == "="): 
+                #if combination i.e. +=, <=, ==
                 lexeme = lexeme + char;
                 lexemeList.append(lexeme) #add the lexeme to list
                 lexeme = ""               #clear lexeme
-            else:                                       #if just equals
+            else:                                       
+                #if just equals
                 if(len(lexeme)>0):  #true means the end of a lexeme
                     lexemeList.append(lexeme) #add the lexeme to list
                     lexeme = ""               #clear lexeme
@@ -102,8 +103,7 @@ def split_into_lexemes(inputText):
                 lexeme = lexeme + char                            
             else:
                 lexeme = lexeme + char                     
-        elif(char == "\'" or char == "\""):                     #if char is string literal
-            print("quote found",end="");
+        elif(char == "\'" or char == "\""):                     #if char is string literal            
             if(len(lexeme)>0):  #true means the end of a lexeme
                 lexemeList.append(lexeme) #add the lexeme to list
                 lexeme = ""               #clear lexeme 
@@ -113,11 +113,7 @@ def split_into_lexemes(inputText):
                 isSingleQuote = True
             else: #char == "\"" #is double quote string
                 isString = True
-                isDoubleQuote = True          
-            
-       
-            
-        
+                isDoubleQuote = True                
                              
         else:                                                   #if char is anything else
             if(len(lexeme)>0): #true means the end of a lexeme 
