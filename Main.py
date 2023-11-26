@@ -1,11 +1,9 @@
 
 #To Do:
-#&&
-#==
-#||    
+#comments
 
-#Number
-#float number
+#dot operator   class.object.variable 
+#dot operator VS decimals points: 0.623
 
 def split_into_lexemes(inputText):
     inputText = inputText.lstrip();  #Remove Whitespaces at start
@@ -21,6 +19,7 @@ def split_into_lexemes(inputText):
     isDoubleQuote = False;  #if detected string is started with "
     
     isNumeric = False; #flag used to mark if we are detecting number (assuming we didnt detect letter before)
+    isDecimal = False;
     
     isCommentSingle = False;   #flag used to mark if we are detecting a single-line comment
     isCommentMultiple = False; #flag used to mark if we are detecting a multi-line comment
@@ -28,58 +27,99 @@ def split_into_lexemes(inputText):
     print("char\tlexeme\tlexemeList");
     
     #we use char as the current character in the text we iterate over
+    
+    operatorList = ["+","-","*","/","%", ">","<","!"];
     for char in inputText:  
         print(char +"\t", end = "");
         
-        if(isString):
-            lexeme = lexeme + char
+        if(isString):                                            #if String literal
+            lexeme = lexeme + char            
             #check also for escape characters
             if((isSingleQuote and char == "\'") or (isDoubleQuote and char == "\"")):
                 lexemeList.append(lexeme) #add the lexeme to list
                 lexeme = ""               #clear lexeme
-                isString      = False;
-                isSingleQuote = False;
-                isDoubleQuote = False;
-            
-        elif(char.isspace()):                                   #if whitespace
-            if(len(lexeme)>0):  #true means the end of a lexeme
-                lexemeList.append(lexeme) #add the lexeme to list
-                lexeme = ""               #clear lexeme
-            #else means nothing to append
-        elif(char.isalpha()):                                   #if letter  
-            lexeme = lexeme + char
-        elif(char.isnumeric()):                                 #if number
-            lexeme = lexeme + char 
-            """
-            if(len(lexeme)>0):                             
-                lexeme = lexeme + char     
+                isString      = False
+                isSingleQuote = False
+                isDoubleQuote = False
+        elif(isNumeric):                                        #if char is integer or float literal
+            #if numeric, or if decimal point (only once)            
+            if( char.isnumeric() or (char == "." and not isDecimal)):   
+                lexeme = lexeme + char
             else:
-                #isNumeric = true;   
+                isNumeric = False
                 lexemeList.append(lexeme) #add the lexeme to list
-                lexeme = ""               #clear lexeme  
-                lexeme = lexeme + char  
-            """
-        elif(char in ["+","-","*","/","%",  ">","<","!"] or char == "=" != lexeme):   #if operator or equal operator
+                lexeme = ""               #clear lexeme
+                lexeme = lexeme + char
+                        
+        elif(char.isspace()):                                   #if char is whitespace
             if(len(lexeme)>0):  #true means the end of a lexeme
                 lexemeList.append(lexeme) #add the lexeme to list
                 lexeme = ""               #clear lexeme
+            #else means nothing to append    
+                                    
+        elif(char.isalpha()):                                   #if char is letter  
             lexeme = lexeme + char
-        elif(char == "=" and lexeme in ["+","-","*","/","%",  ">","<","!","="]):  #if operator that is followed by equals ie. += , *=
-            lexeme = lexeme + char
-            lexemeList.append(lexeme) #add the lexeme to list
-            lexeme = ""               #clear lexeme       
-        elif(char == "\'" or char == "\""):                     #if string / left quote
+        elif(char.isnumeric()):                                 #if char is  number               
+            if(lexeme.isnumeric() or lexeme == "."):
+                isNumeric = True;         
+            elif(len(lexeme)>0):  #true means the end of a lexeme
+                lexemeList.append(lexeme) #add the lexeme to list
+                lexeme = ""            
+            lexeme = lexeme + char   
+            
+        elif(char=="."):                                        #if char is dot            
+            if(lexeme.isnumeric()):
+                isNumeric = True;    
+            elif(len(lexeme)>0): #true means the end of a lexeme 
+                lexemeList.append(lexeme) #add the lexeme to list
+                lexeme = ""               #clear lexeme   
+            lexeme = lexeme + char     
+                  
+        elif(char in operatorList):                             #if char is operator 
             if(len(lexeme)>0):  #true means the end of a lexeme
                 lexemeList.append(lexeme) #add the lexeme to list
-                lexeme = ""  
+                lexeme = ""               #clear lexeme
+            lexeme = lexeme + char   
+        elif(char == "="):                                      #if char is equals operator   
+            #if operator then equals i.e. +=, <=, ==
+            if(lexeme in operatorList or lexeme == "="): 
+                lexeme = lexeme + char;
+                lexemeList.append(lexeme) #add the lexeme to list
+                lexeme = ""               #clear lexeme
+            else:                                       #if just equals
+                if(len(lexeme)>0):  #true means the end of a lexeme
+                    lexemeList.append(lexeme) #add the lexeme to list
+                    lexeme = ""               #clear lexeme
+                lexeme = lexeme + char    
+        elif(char in ["&", "|"]):                               #if char is  relational operators AND and OR
+            if(char == lexeme):   #true means it's && or ||
+                lexeme = lexeme + char                            
+                lexemeList.append(lexeme) #add the lexeme to list
+                lexeme = ""               #clear lexeme                           
+            elif(len(lexeme)>0):  #true means the end of a lexeme
+                lexemeList.append(lexeme) #add the lexeme to list
+                lexeme = ""               #clear lexeme                           
+                lexeme = lexeme + char                            
+            else:
+                lexeme = lexeme + char                     
+        elif(char == "\'" or char == "\""):                     #if char is string literal
+            print("quote found",end="");
+            if(len(lexeme)>0):  #true means the end of a lexeme
+                lexemeList.append(lexeme) #add the lexeme to list
+                lexeme = ""               #clear lexeme 
             lexeme = lexeme + char                           
-            if(char == "\'"):          
+            if(char == "\'"):   #is single quote string  
                 isString = True
                 isSingleQuote = True
-            else: #char == "\""
+            else: #char == "\"" #is double quote string
                 isString = True
-                isDoubleQuote = True            
-        else:                                                   #if anything else
+                isDoubleQuote = True          
+            
+       
+            
+        
+                             
+        else:                                                   #if char is anything else
             if(len(lexeme)>0): #true means the end of a lexeme 
                 lexemeList.append(lexeme) #add the lexeme to list
                 lexeme = ""               #clear lexeme                          
@@ -107,9 +147,9 @@ def main():
     
     #for i in range(0, len(lexemeList), i):
         
-    print("\nLEXEMES:\n-----------------------------------------------------");
+    print("\nLEXEMES:\n-----------------------------");
     for a in lexemeList:
-        print(a);
+        print("-> "+a);
         
     print("Lexeme Count: "+str(len(lexemeList)));
         
