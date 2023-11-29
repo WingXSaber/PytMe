@@ -17,7 +17,9 @@ print(sys.argv);
 #escape string character
 #signed numeric / negative values
 
-#bug "+b"
+#bugs:
+# +b
+#0..5
 
 #illegal characters
 # example ~
@@ -38,7 +40,6 @@ print(sys.argv);
 #    TOKEN      LINE    LEXEME   
 #    SEMICOLON  1       ;              
 #
-
 
 
 a = +-1;
