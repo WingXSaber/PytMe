@@ -1,14 +1,51 @@
+import sys
+
+print(sys.argv);
 
 #To Do:
 #comments
+#single line comment //     /n
+#multi line comment  /*      */
 
-#dot operator   class.object.variable 
-#dot operator VS decimals points: 0.623
+#dot operator
+# example: class.object.variable = 'class', '.', 'object', '.', 'variable'
 
+#dot but decimal points: 
+#  0.623
+#  .07
+
+#escape string character
+#signed numeric / negative values
+
+#bug "+b"
+
+#illegal characters
+# example ~
+# basically anything that is not detected
+# cha
+
+#multiline/text file input
+#   line number count
+#   use args as getter for txtfile address
+#   example python Main.py path/to/file/txtfile.txt
+
+#output in a text file
+#    bascially put the print into a text file as well
+#    Format: 
+#    TOKEN/t/tLINE/t/tLEXEME
+#    TOKEN/t/tLINE/t/tLEXEME
+#       
+#    TOKEN      LINE    LEXEME   
+#    SEMICOLON  1       ;              
+#
+
+
+
+a = +-1;
 def split_into_lexemes(inputText):
     inputText = inputText.lstrip();  #Remove Whitespaces at start
     inputText = inputText.rstrip();  #Remove Whitespaces at end
-    print(inputText);
+    print(inputText);    
     
     lexemeList = [];    #contains all the lexemes detected
     lexeme = "";        #current lexeme storage, gets cleared every succesful detection
@@ -29,6 +66,7 @@ def split_into_lexemes(inputText):
     #we use char as the current character in the text we iterate over
     
     operatorList = ["+","-","*","/","%", ">","<","!"];
+    
     for char in inputText:  
         print(char +"\t", end = "");
         
@@ -133,6 +171,10 @@ def split_into_lexemes(inputText):
     return lexemeList; 
 
 
+def identify_tokens_from(lexemeList):
+    tokenList = []    
+    return tokenList;
+    
 
 def main():
     print("Enter syntax:");
