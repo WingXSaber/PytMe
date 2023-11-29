@@ -24,7 +24,8 @@ print(sys.argv);
 #illegal characters
 # example ~
 # basically anything that is not detected
-# cha
+# Logic: Do not assume illegal characters, only detect legal characters
+#
 
 #multiline/text file input
 #   line number count
@@ -41,8 +42,6 @@ print(sys.argv);
 #    SEMICOLON  1       ;              
 #
 
-
-a = +-1;
 def split_into_lexemes(inputText):
     inputText = inputText.lstrip();  #Remove Whitespaces at start
     inputText = inputText.rstrip();  #Remove Whitespaces at end
