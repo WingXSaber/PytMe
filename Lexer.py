@@ -109,11 +109,11 @@ class Token(Enum):
     
 #   or
     
-    STRING = auto();
-    INT = auto();
-    FLOAT = auto();
-    BOOLEAN = auto();
-    CHAR = auto();
+    #STRING = auto();
+    #INT = auto();
+    #FLOAT = auto();
+    #BOOLEAN = auto();
+    #CHAR = auto();
     
     #   Not a valid Lexeme    
     INVALID = auto(); 
@@ -144,8 +144,7 @@ class lexeme:
     
     def __str__(self):
         """Function called if state is used as string such as in print()
-        """
-        print(self.token);
+        """        
         return (str(self.token)
                 +" \t"+str(self.lineNumber)
                 +"\t"+str(self.columnNumber)
@@ -185,10 +184,10 @@ print(test.state)
 print(test.symbolTable);
 
 lex = lexeme(">", Token.GREATER, 0,0);
-print((str(self.token)
-                +" \t"+str(self.lineNumber)
-                +"\t"+str(self.columnNumber)
-                +"\t"+str(self.value)
-               );  
+print("Token     "
+      +" \t"+"Line #"
+      +"\t"+"Col #"
+      +"\t"+"Lexeme"
+      );  
 print(lex)
     
