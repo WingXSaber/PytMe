@@ -19,7 +19,9 @@ class State(Enum):
     #      auto()       = built in function of enum used for auto-count instead
     #                     of manually defining each state attribute by counting.
     start = auto();
-    stop = auto();   
+    identifier = auto();   
+    number = auto();
+    end = auto();
                 
                 
     def __str__(self):
@@ -50,48 +52,48 @@ class Token(Enum):
     COMMENT = auto();          
     
     #   Delmiters:    
-    BRACKETLEFT = auto();
-    BRACKETRIGHT = auto();
+    BRACKETLEFT = auto();   #   {
+    BRACKETRIGHT = auto();  #   }
     
-    PARENTHESISLEFT = auto();
-    PARENTHESISRIGHT = auto();    
+    PARENTHESISLEFT = auto();   #   (
+    PARENTHESISRIGHT = auto();  #   )
     
-    SEMICOLON = auto();
+    SEMICOLON = auto(); #   ;
     
-    SINGLECOMMENTLEFT = auto();
-    MULTICOMMENTLEFT = auto();
-    MULTICOMMENTRIGHT = auto();    
+    SINGLECOMMENTLEFT = auto(); #   //
+    MULTICOMMENTLEFT = auto();  #   /*
+    MULTICOMMENTRIGHT = auto(); #   */
     
     #   Arithmetic Operators
-    ADD = auto();
-    SUBTRACT = auto();
-    MULTIPLY = auto();
-    DIVIDE = auto();
-    MODULO = auto();
-    EXPONENT = auto();    
+    ADD = auto();       #   +
+    SUBTRACT = auto();  #   -
+    MULTIPLY = auto();  #   *
+    DIVIDE = auto();    #   /
+    MODULO = auto();    #   %
+    EXPONENT = auto();  #   ^
     #WHAT 7th?? = auto(); 
     
     #   Boolean Operators    
-    GREATER = auto();
-    LESS = auto();    
-    GREATEREQUAL = auto();
-    LESSEQUAL = auto();        
-    NOTEQUAL = auto();
-    EQUAL = auto();
-    AND = auto();
-    OR = auto();
-    NOT = auto();
+    GREATER = auto();           #   >
+    LESS = auto();              #   <
+    GREATEREQUAL = auto();      #   <=
+    LESSEQUAL = auto();         #   >=
+    NOTEQUAL = auto();          #   !=
+    EQUAL = auto();             #   ==
+    AND = auto();               #   &&
+    OR = auto();                #   ||
+    NOT = auto();               #   !
     
     #   Other Operators
-    DOT = auto();
+    DOT = auto();               #   .
     
     #   Assignment Operators
-    ASSIGN = auto();
-    ASSIGNADD = auto();
-    ASSIGNSUBTRACT = auto();
-    ASSIGNMULTIPLY = auto();
-    ASSIGNDIVIDE = auto();
-    ASSIGNMODULO = auto();
+    ASSIGN = auto();            #   =
+    ASSIGNADD = auto();         #   +=
+    ASSIGNSUBTRACT = auto();    #   -=
+    ASSIGNMULTIPLY = auto();    #   *=
+    ASSIGNDIVIDE = auto();      #   /=
+    ASSIGNMODULO = auto();      #   %=
     
     #   Unary Operators
     
@@ -101,6 +103,14 @@ class Token(Enum):
 #IS THIS RIGHT CHAT????????????????????????????????????????????????????????   
     AVATAR = auto(); #IS THIS RIGHT CHAT????????????????????????????????????????????????????????   
     FIGURE = auto();#IS THIS RIGHT CHAT????????????????????????????????????????????????????????   
+    FLOAT = auto();
+    BOOLEAN = auto();
+    CHAR = auto();
+    
+#   or
+    
+    STRING = auto();
+    INT = auto();
     FLOAT = auto();
     BOOLEAN = auto();
     CHAR = auto();
@@ -164,6 +174,7 @@ class Lexer:
         if(FILENOTSPYC == true):
             raise TypeError;
             """
+        #while(self.state != State.end)
         pass
         
     print("RUNNING THE LEXER");
@@ -174,5 +185,10 @@ print(test.state)
 print(test.symbolTable);
 
 lex = lexeme(">", Token.GREATER, 0,0);
+print((str(self.token)
+                +" \t"+str(self.lineNumber)
+                +"\t"+str(self.columnNumber)
+                +"\t"+str(self.value)
+               );  
 print(lex)
     
