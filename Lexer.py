@@ -59,8 +59,8 @@ class Token(Enum):
     SEMICOLON = auto();
     
     SINGLECOMMENTLEFT = auto();
-    MULTCOMMENTLEFT = auto();
-    MULTCOMMENTRIGHT = auto();    
+    MULTICOMMENTLEFT = auto();
+    MULTICOMMENTRIGHT = auto();    
     
     #   Arithmetic Operators
     ADD = auto();
@@ -71,12 +71,31 @@ class Token(Enum):
     EXPONENT = auto();    
     #WHAT 7th?? = auto(); 
     
-    #   Boolean Operators
+    #   Boolean Operators    
     GREATER = auto();
-    LESS = auto();
-    EQUAL = auto();
+    LESS = auto();    
     GREATEREQUAL = auto();
-    LESSEQUAL = auto();
+    LESSEQUAL = auto();        
+    NOTEQUAL = auto();
+    EQUAL = auto();
+    AND = auto();
+    OR = auto();
+    NOT = auto();
+    
+    #   Other Operators
+    DOT = auto();
+    
+    #   Assignment Operators
+    ASSIGN = auto();
+    ASSIGNADD = auto();
+    ASSIGNSUBTRACT = auto();
+    ASSIGNMULTIPLY = auto();
+    ASSIGNDIVIDE = auto();
+    ASSIGNMODULO = auto();
+    
+    #   Unary Operators
+    
+        
     
     #   Constants
 #IS THIS RIGHT CHAT????????????????????????????????????????????????????????   
@@ -112,6 +131,16 @@ class lexeme:
         self.token = token;
         self.lineNumber = lineNumber;
         self.columnNumber = columnNumber;
+    
+    def __str__(self):
+        """Function called if state is used as string such as in print()
+        """
+        print(self.token);
+        return (str(self.token)
+                +" \t"+str(self.lineNumber)
+                +"\t"+str(self.columnNumber)
+                +"\t"+str(self.value)
+               );  
 
 class Lexer:
     """The Lexical Analyzer class.
@@ -144,5 +173,6 @@ test = Lexer();
 print(test.state)
 print(test.symbolTable);
 
-    
+lex = lexeme(">", Token.GREATER, 0,0);
+print(lex)
     
