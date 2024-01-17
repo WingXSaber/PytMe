@@ -1,35 +1,6 @@
 from enum import Enum, auto;
 
-
-class State(Enum):
-    """An enum class for defining States and accessed through its attributes.
-    
-    It is accessed as:  State.<state name>
-    
-    Each state has a unique set of actions and transitions given the conditions. 
-    
-    Returns:
-        __str__: name of state.
-    """
-        
-    #State type List:
-    #   Format: <State Name> = auto()     
-    #   Legend:
-    #      <State Name> = name of state
-    #      auto()       = built in function of enum used for auto-count instead
-    #                     of manually defining each state attribute by counting.
-    start = auto();
-    identifier = auto();   
-    number = auto();
-    end = auto();
-                
-                
-    def __str__(self):
-        """Function called if state is used as string such as in print()
-        """
-        return self.name;    
-    
-    
+       
 class Token(Enum):
     """An enum class for defining Tokens and accessed through its attributes. 
     
@@ -47,6 +18,7 @@ class Token(Enum):
     #                     of manually defining each state attribute by counting.
     IDENTIFIER = auto();
     KEYWORD = auto();
+        #NEED BA NA IDENTIFY ANONG KEYWORD
     RESERVEWORD = auto();
     NOISEWORD = auto(); #????????????????????
     COMMENT = auto();          
@@ -70,7 +42,7 @@ class Token(Enum):
     MULTIPLY = auto();  #   *
     DIVIDE = auto();    #   /
     MODULO = auto();    #   %
-    EXPONENT = auto();  #   ^
+    EXPONENT = auto();  #   **
     #WHAT 7th?? = auto(); 
     
     #   Boolean Operators    
@@ -96,25 +68,17 @@ class Token(Enum):
     ASSIGNMODULO = auto();      #   %=
     
     #   Unary Operators
-    
-        
-    
+    UNARYMINUS = auto();#   -
+    INCREMENT = auto(); #   ++
+    DECREMENT = auto(); #   --
+
     #   Constants
-#IS THIS RIGHT CHAT????????????????????????????????????????????????????????   
-    AVATAR = auto(); #IS THIS RIGHT CHAT????????????????????????????????????????????????????????   
-    FIGURE = auto();#IS THIS RIGHT CHAT????????????????????????????????????????????????????????   
+    STRING = auto();    #????????????????????????????????????????????????????????   
+    FIGURE = auto();
     FLOAT = auto();
     BOOLEAN = auto();
-    CHAR = auto();
-    
-#   or
-    
-    #STRING = auto();
-    #INT = auto();
-    #FLOAT = auto();
-    #BOOLEAN = auto();
-    #CHAR = auto();
-    
+    AVATAR = auto(); 
+        
     #   Not a valid Lexeme    
     INVALID = auto(); 
         
@@ -151,6 +115,43 @@ class lexeme:
                 +"\t"+str(self.value)
                );  
 
+
+class State(Enum):
+    """An enum class for defining States and accessed through its attributes.
+    
+    It is accessed as:  State.<state name>
+    
+    Each state has a unique set of actions and transitions given the conditions. 
+    
+    Returns:
+        __str__: name of state.
+    """
+        
+    #State type List:
+    #   Format: <State Name> = auto()     
+    #   Legend:
+    #      <State Name> = name of state
+    #      auto()       = built in function of enum used for auto-count instead
+    #                     of manually defining each state attribute by counting.
+    initialized = auto(); 
+    activated = auto(); 
+    
+    character = auto();
+    identifier = auto();   
+    number = auto();
+    comment = auto();
+    
+    endOfLine = auto();
+    endOfFile = auto();
+    processed = auto();
+                
+                
+    def __str__(self):
+        """Function called if state is used as string such as in print()
+        """
+        return self.name;    
+
+
 class Lexer:
     """The Lexical Analyzer class.
     
@@ -161,10 +162,16 @@ class Lexer:
     
     #Constructor
     def __init__(self):        
-        self.state = State.start;
-        self.symbolTable = [];        
+        self.state = State.initialized;
+        self.symbolTable = []; 
+        self.lineNumber = -1;       
+        
+        self.operatorList = ["+","-","*","/","%", ">","<","!"];
+        self.keywordList = ["supreme","synchronized","this","toggle ","twin","unarmed","unstable","while"]
+        
+        
     
-    def loadFile(self, address):
+    def loadFile(self, address):              
         """
         if(addressNotValid == True):
             raise NotADirectoryError
@@ -172,22 +179,64 @@ class Lexer:
             raise FileNotFoundError
         if(FILENOTSPYC == true):
             raise TypeError;
-            """
-        #while(self.state != State.end)
-        pass
+        """                    
+              
+        with open(address, 'r') as myfile:
+            lines = myfile.readlines()
+            for line in lines:
+                print(line, end = "");
+       
+        #processtext(self, inputText):        
+    
+               
+    def processText(self, inputText):
+        self.state = State.character;
+        inputLine = inputText;
+        self.lineNumber+=1;
         
+        charIndex = 0;  #colNumber = 0;        
+        while(self.state != State.endOfFile):
+            charCurrent = inputLine[charIndex];
+            
+            print(charCurrent);
+                
+            charIndex+=1;
+            self.state = State.endOfFile
+            
+            #if (text in self.keywordList):
+            #    token = KEYWORD.
+            
+        self.state = State.activated;
+ 
+
+        
+        
+    def show(self):        
+        if(self.symbolTable == []): #if symbolTable is empty
+            print("No symbols found.");
+        else:           
+            print("============== SYMBOL TABLE =================================");
+            #add condition here 
+            # if comment, convert all \n to \\n
+            print("Token     "
+                        +" \t"+"Line #"
+                        +"\t"+"Col #"
+                        +"\t"+"Lexeme"
+                        );  
+            print("-------------------------------------------------------------");
+            for symbol in self.symbolTable:
+                print(symbol);
+        #return textSymbolTablem
+    
     print("RUNNING THE LEXER");
     
 
 test = Lexer();
-print(test.state)
-print(test.symbolTable);
+#test.loadFile('myfile.txt');
 
 lex = lexeme(">", Token.GREATER, 0,0);
-print("Token     "
-      +" \t"+"Line #"
-      +"\t"+"Col #"
-      +"\t"+"Lexeme"
-      );  
-print(lex)
-    
+#print(lex)
+
+test.symbolTable.append(lex);
+test.show()
+
