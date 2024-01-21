@@ -152,7 +152,7 @@ class State(Enum):
         return self.name;    
 
 
-class Lexer:
+class Lexer():
     """The Lexical Analyzer class.
     
     Attributes:
@@ -168,48 +168,34 @@ class Lexer:
         
         self.operatorList = ["+","-","*","/","%", ">","<","!"];
         self.keywordList = ["supreme","synchronized","this","toggle ","twin","unarmed","unstable","while"]
-        
-        
     
-    def loadFile(self, address):              
-        """
-        if(addressNotValid == True):
-            raise NotADirectoryError
-        if(FILENOTFOUND == True):    
-            raise FileNotFoundError
-        if(FILENOTSPYC == true):
-            raise TypeError;
-        """                    
-              
-        with open(address, 'r') as myfile:
-            lines = myfile.readlines()
-            for line in lines:
-                print(line, end = "");
-       
-        #processtext(self, inputText):        
-    
-               
+                   
     def processText(self, inputText):
-        self.state = State.character;
-        inputLine = inputText;
-        self.lineNumber+=1;
+        #TODO check if inputText is valid ===================
+                        
         
-        charIndex = 0;  #colNumber = 0;        
+        lexemeList = [];
+        
         while(self.state != State.endOfFile):
-            charCurrent = inputLine[charIndex];
+            inputLine = inputText[self.lineNumber];                        
             
-            print(charCurrent);
+            lexeme = "";            
+            for colNumber in range(len(inputLine)):                
+                self.state = State.character;            
+                charCurrent = inputLine[colNumber];                        
+                print(charCurrent, end="");                                
                 
-            charIndex+=1;
-            self.state = State.endOfFile
-            
-            #if (text in self.keywordList):
-            #    token = KEYWORD.
-            
-        self.state = State.activated;
- 
+                #if (text in self.keywordList):
+                #    token = KEYWORD.
 
-        
+            if(self.lineNumber+1 >= len(inputText)):   
+                self.state = State.endOfFile
+            else:
+                self.lineNumber+=1;   
+            
+          
+        self.state = State.activated;
+    
         
     def show(self):        
         if(self.symbolTable == []): #if symbolTable is empty
@@ -226,17 +212,16 @@ class Lexer:
             print("-------------------------------------------------------------");
             for symbol in self.symbolTable:
                 print(symbol);
-        #return textSymbolTablem
-    
-    print("RUNNING THE LEXER");
+        #return textSymbolTablem    
     
 
-test = Lexer();
+#test = Lexer();
 #test.loadFile('myfile.txt');
 
-lex = lexeme(">", Token.GREATER, 0,0);
-#print(lex)
+#lex = lexeme(">", Token.GREATER, 0,0);
+##print(lex)
+#
+#test.symbolTable.append(lex);
+#test.show()
 
-test.symbolTable.append(lex);
-test.show()
-
+#test.processText();
