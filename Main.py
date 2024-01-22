@@ -2,7 +2,9 @@ import sys;
 import os;
 from Lexer import Lexer;
 
+print("Args:")
 print(sys.argv);
+
 dir_path = os.path.dirname(os.path.realpath(__file__));  #Initialize path of the system
 
 def loadFile(address):              
