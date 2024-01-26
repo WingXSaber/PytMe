@@ -2,32 +2,29 @@ import sys;
 import os;
 from Lexer import Lexer;
 
-print("Args:")
-print(sys.argv);
+#print("Args:")
+#print(sys.argv);
 
 dir_path = os.path.dirname(os.path.realpath(__file__));  #Initialize path of the system
 
-def loadFile(address):              
-        """
-        if(addressNotValid == True):
-            raise NotADirectoryError
-        if(FILENOTFOUND == True):    
-            raise FileNotFoundError
-        if(FILENOTSPYC == true):
-            raise TypeError;
-        """                    
-              
+def loadFile(address):      
+                    
+        lexer = Lexer();     
+        
         with open(address, 'r') as myfile:
             lines = myfile.readlines()
-            #print(lines);
-            #print(type(lines));            
-            #for line in lines:
-            #    print(line, end = "");
-            lexer = Lexer();
-            lexer.processText(lines);
-            
+           
+            lexer.processText(lines);            
+            print("LEXICAL ANALYSIS COMPLETE");
        
-        #Lexer.processtext(self, inputText):    
+        with open('symboltable.txt', 'w') as file:
+            file.write(lexer.getOutput());            
+            print("symboltable.txt is written.");
         
-        
-loadFile("myfile.txt");
+try:
+    if(sys.argv[1][-4]+(sys.argv[1][-3]+sys.argv[1][-2]+sys.argv[1][-1]).lower() == ".pyt"):
+        loadFile(sys.argv[1]);
+    else:
+        print("Invalid filetype");
+except:
+    print("No file found at address found");
