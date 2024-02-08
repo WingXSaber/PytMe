@@ -19,23 +19,23 @@ number of level is also the number of /t
 
  */
 
-public enum Token{
-    IDENTIFIER(),
-    KEYWORD(),
+enum Token{
+    IDENTIFIER,
+    KEYWORD,
         
-    RESERVEWORD(),
-    NOISEWORD(), 
-    COMMENT(),          
+    RESERVEWORD,
+    NOISEWORD, 
+    COMMENT,          
     
     //   Delmiters:    
-    BOXLEFT(),   //   [
-    BOXRIGHT(),  //   ]
+    BOXLEFT,   //   [
+    BOXRIGHT,  //   ]
     
-    PARENLEFT(),   //   (
-    PARENRIGHT(),  //   )
+    PARENLEFT,   //   (
+    PARENRIGHT,  //   )
     
-    CURLYL(),   //   {
-    CURLYR(),  //   }
+    CURLYL,   //   {
+    CURLYR,  //   }
     
     SEMICOLON(), //   ,
     
@@ -68,7 +68,7 @@ public enum Token{
     DOT(),               //   .
     
     //   Assignment Operators
-    ASSIGN(),        //   =
+    ASSIGN,        //   =
     ASSIGNADD(),     //   +=
     ASSIGNSUB(),     //   -=
     ASSIGNMULT(),    //   *=
@@ -82,7 +82,7 @@ public enum Token{
 
     //   Constants
     STRING(),     //    PARTY(),           
-    INTEGER(),    //    POINT(), 
+    INTEGER,    //    POINT(), 
     FLOAT(),      //    FIGURE(),     
     BOOLEAN(),    //    TRUTH(), 
     CHAR(),       //    AVATAR(),      
@@ -98,7 +98,7 @@ public abstract class GrammarRule{
     String name;
     Token [] tokenList;
 
-    public Rule(String name, Token[] tokenList){
+    public GrammarRule(String name, Token[] tokenList){
         this.name = name;
         this.tokenList = tokenList;
     }
