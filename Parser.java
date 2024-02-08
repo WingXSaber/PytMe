@@ -1,10 +1,5 @@
 
-
 /*
-
-
-
-
 Statement(){
 	String grammar;
 	Token TokenList[];
@@ -13,10 +8,6 @@ Statement(){
 
 int level
 number of level is also the number of /t
-
-
-
-
  */
 
 enum Token{
@@ -97,6 +88,7 @@ enum Token{
 public abstract class GrammarRule{
     String name;
     Token [] tokenList;
+    // Token [] tokenList = {Token.ASSIGN, Token.INTEGER, Token.SEMICOLON};       
 
     public GrammarRule(String name, Token[] tokenList){
         this.name = name;
@@ -120,15 +112,19 @@ public abstract class GrammarRule{
     public abstract void check();
 
     public void showError(int inputIndex){
-        lineNumber = 0;
-        System.out.println("Error (Line:"+lineNumber+"): Expecting "+tokenList[tokenList]);
+        System.out.println("Error (Line:"+lineNumber+"): Expecting "+tokenList[inputIndex]);
     }
 }
+
+
 
 public class Parser{
     
 
     //public Parser(){
+        //define rules
+        //put rules in a Grammar Rule Array
+        //readSymbolTable()
         
     //}
 
@@ -136,7 +132,9 @@ public class Parser{
     //}
 
     public static void main(String[]args){
-        Token [] currentTokenStream = {Token.ASSIGN, Token.INTEGER, Token.ASSIGN};
+        
+
+        Token [] currentTokenStream = {Token.ASSIGN, Token.INTEGER, Token.SEMICOLON};
         //System.out.println(Token.ASSIGN);
         //for(int x=0; x<current.length; x++)
         //    System.out.println(current[x]);
