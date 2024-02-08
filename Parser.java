@@ -9,6 +9,7 @@ Statement(){
 int level
 number of level is also the number of /t
  */
+import java.util.List;
 
 enum Token{
     IDENTIFIER,
@@ -73,7 +74,7 @@ enum Token{
 
     //   Constants
     STRING(),     //    PARTY(),           
-    INTEGER,    //    POINT(), 
+    INTEGER,      //    POINT(), 
     FLOAT(),      //    FIGURE(),     
     BOOLEAN(),    //    TRUTH(), 
     CHAR(),       //    AVATAR(),      
@@ -85,10 +86,10 @@ enum Token{
     INVALID(), 
 }
 
-public abstract class GrammarRule{
+public class GrammarRule{
     String name;
     Token [] tokenList;
-    // Token [] tokenList = {Token.ASSIGN, Token.INTEGER, Token.SEMICOLON};       
+         
 
     public GrammarRule(String name, Token[] tokenList){
         this.name = name;
@@ -124,15 +125,40 @@ public class Parser{
     //public Parser(){
         //define rules
         //put rules in a Grammar Rule Array
-        //readSymbolTable()
+        //lexemeList = readSymbolTable()
         
     //}
-
+    GrammarRule [] grammarRules = {    
+                                    new GrammarRule("DEFINITION" , {Token.STRING , Token.IDENTIFIER, Token.ASSIGN, Token.INTEGER, Token.SEMICOLON} ),
+                                    new GrammarRule("DEFINITION" , {Token.INTEGER, Token.IDENTIFIER, Token.ASSIGN, Token.INTEGER, Token.SEMICOLON} ),
+                                    new GrammarRule("DEFINITION" , {Token.FLOAT  , Token.IDENTIFIER, Token.ASSIGN, Token.INTEGER, Token.SEMICOLON} ),
+                                    new GrammarRule("DEFINITION" , {Token.BOOLEAN, Token.IDENTIFIER, Token.ASSIGN, Token.INTEGER, Token.SEMICOLON} ),
+                                    new GrammarRule("DEFINITION" , {Token.CHAR   , Token.IDENTIFIER, Token.ASSIGN, Token.INTEGER, Token.SEMICOLON} ),
+                                    new GrammarRule("DEFINITION" , {Token.STRING, Token.IDENTIFIER, Token.SEMICOLON} )
+                                  };
     //readSymbolTable(){
     //}
 
+    //run(){
+        //GrammarRule.checkToRule(CurrentTokenList);
+    //    List TokenList = <STRING>;
+
+
+
+        //.append()
+        //.remove()
+
+        //loop through each symbols in lexemeList
+        //check each rules defined
+        //If one of the rules meet, valid
+        //if none of the rules meet, get the most recent valid rule,
+        //       then print the error/expected token/missing token
+        //if all symbols are read, then print success and end program
+    //}
+
     public static void main(String[]args){
-        
+        //Parser p = new Parser();
+        //p.run();
 
         Token [] currentTokenStream = {Token.ASSIGN, Token.INTEGER, Token.SEMICOLON};
         //System.out.println(Token.ASSIGN);
@@ -150,7 +176,6 @@ public class Parser{
                 if(input[x]!=tokenList[x]) 
                     return false;   //not match
             }
-            System.out.println("AA");
         }          
         return true;  
     }

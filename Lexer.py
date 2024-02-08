@@ -595,6 +595,10 @@ class Lexer():
         output = output + "=========================================================\n";
         for i in self.lexemeList:            
             a,b,c,d = i;
+            #a = Token
+            #b = Line
+            #c = Col
+            #d = Lexeme
             #print(i);
             output = output + (f"{repr(str(d)):20}"+" "+
                                f"{repr(str(b)):3}"+"   "+

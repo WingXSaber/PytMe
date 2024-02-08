@@ -1,6 +1,7 @@
 import sys;
 import os;
 from Lexer import Lexer;
+#from Parser import Parser;
 
 #print("Args:")
 #print(sys.argv);
@@ -20,6 +21,8 @@ def loadFile(address):
         with open('symboltable.txt', 'w') as file:
             file.write(lexer.getOutput());            
             print("symboltable.txt is written.");
+            
+        Parser.parseSymbolTable(lexer.lexemeList);
         
 try:
     if(sys.argv[1][-4]+(sys.argv[1][-3]+sys.argv[1][-2]+sys.argv[1][-1]).lower() == ".pyt"):
