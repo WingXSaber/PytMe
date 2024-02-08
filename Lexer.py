@@ -64,12 +64,12 @@ class Token(Enum):
     DOT = auto();               #   .
     
     #   Assignment Operators
-    ASSIGN = auto();            #   =
-    ASSIGNADD = auto();         #   +=
-    ASSIGNSUB = auto();    #   -=
+    ASSIGN = auto();        #   =
+    ASSIGNADD = auto();     #   +=
+    ASSIGNSUB = auto();     #   -=
     ASSIGNMULT = auto();    #   *=
-    ASSIGNDIV = auto();      #   /=
-    ASSIGNMOD = auto();      #   %=
+    ASSIGNDIV = auto();     #   /=
+    ASSIGNMOD = auto();     #   %=
     
     #   Unary Operators
     UNARYMINUS = auto();#   -
@@ -77,11 +77,11 @@ class Token(Enum):
     DECREMENT = auto(); #   --
 
     #   Constants
-    PARTY = auto();    
-    POINT = auto();
-    FIGURE = auto();
-    TRUTH = auto();
-    AVATAR = auto(); 
+    STRING = auto();     #    PARTY = auto();           
+    INTEGER = auto();    #    POINT = auto(); 
+    FLOAT = auto();      #    FIGURE = auto();     
+    BOOLEAN = auto();    #    TRUTH = auto(); 
+    CHAR = auto();       #    AVATAR = auto();      
      
     # newline
     NEWLINE = auto();  
