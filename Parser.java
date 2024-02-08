@@ -136,11 +136,11 @@ public class Parser{
     //}
 
     public static void main(String[]args){
-        Token [] current = {Token.ASSIGN, Token.INTEGER, Token.ASSIGN};
-        System.out.println(Token.ASSIGN);
-        for(int x=0; x<current.length; x++)
-            System.out.println(current[x]);
-        System.out.println(checkToRule(current));
+        Token [] currentTokenStream = {Token.ASSIGN, Token.INTEGER, Token.ASSIGN};
+        //System.out.println(Token.ASSIGN);
+        //for(int x=0; x<current.length; x++)
+        //    System.out.println(current[x]);
+        System.out.println(checkToRule(currentTokenStream));
         
     }   
     
