@@ -170,16 +170,16 @@ class Lexer():
             token = Token.IDENTIFIER;            
         elif(self.state == State.string):
             if(lexeme in ["truth", "true", "false"]):
-                token = Token.TRUTH;
+                token = Token.BOOLEAN;
             elif(lexeme in self.keywordList):
                 token = Token.KEYWORD;
             else:
                 token = Token.IDENTIFIER;
             
         elif(self.state == State.number):
-            token = Token.POINT;
+            token = Token.INTEGER;
         elif(self.state == State.float):
-            token = Token.FIGURE;
+            token = Token.FLOAT;
         elif(self.state == State.comment):
             token = Token.COMMENT;
         elif(self.state == State.operator):
@@ -231,7 +231,7 @@ class Lexer():
             token = Token.SEMICOLON;
         
         elif(self.state == State.stringLiteral):
-            token = Token.PARTY;
+            token = Token.STRING;
         
         #elif(self.state == State.delimiter):
         elif(lexeme == "{"):

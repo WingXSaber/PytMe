@@ -1,7 +1,7 @@
 import sys;
 import os;
 from Lexer import Lexer;
-#from Parser import Parser;
+from Parser import Parser;
 
 #print("Args:")
 #print(sys.argv);
@@ -22,12 +22,13 @@ def loadFile(address):
             file.write(lexer.getOutput());            
             print("symboltable.txt is written.");
             
-        Parser.parseSymbolTable(lexer.lexemeList);
+        parser = Parser();
+        parser.parseSymbolTable(lexer.lexemeList);
         
-try:
-    if(sys.argv[1][-4]+(sys.argv[1][-3]+sys.argv[1][-2]+sys.argv[1][-1]).lower() == ".pyt"):
-        loadFile(sys.argv[1]);
-    else:
-        print("Invalid filetype");
-except:
-    print("No file found at address found");
+#try:    
+if(sys.argv[1][-4]+(sys.argv[1][-3]+sys.argv[1][-2]+sys.argv[1][-1]).lower() == ".pyt"):
+    loadFile(sys.argv[1]);
+else:
+    print("Invalid filetype");
+#except:
+    #print("No file found at address found");
